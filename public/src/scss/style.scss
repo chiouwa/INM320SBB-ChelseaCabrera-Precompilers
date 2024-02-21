@@ -1,0 +1,299 @@
+/* This is the original example. You can take all css styles from here. */
+
+$colorGrey: #787878;
+$colorLightGrey: #999999;
+$colorBlack: #111111;
+$colorBlue: #35c4ce;
+$colorNavyBlue: #324360;
+
+$spacing: 20px 0;
+$spacing2: 1px;
+$sizeWidth: 200px;
+$font1: 'Josefin Sans', sans-serif;
+
+@mixin body-style {
+    font-family: Quando;
+    font-size: 15px;
+    color: $colorGrey
+}
+
+@mixin post-title-style {
+    color: $colorNavyBlue;
+    text-transform: uppercase;
+    font-size: 26px;
+    font-weight: 900;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    line-height: 1.3em;
+    transition: all .3s ease;
+}
+
+body {
+    @include body-style;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+p {
+    margin-bottom: 25px;
+    line-height: 1.6em;
+}
+// NESTING 1
+a {
+    font-weight: 400;
+    text-decoration: none;
+    color: $colorBlack;
+    transition: .20s;
+    &:hover {
+        color: $colorLightGrey;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 25px;
+    margin-bottom: 20px;
+    font-family: $font1;
+    font-weight: 400;
+    line-height: 1.3em;
+    word-wrap: break-word;
+    color: $colorBlack;
+}
+h1 {
+    font-size: 37px;
+}
+h2 {
+    font-size: 31px;
+}
+h3 {
+    font-size: 26px;
+}
+h4 {
+    font-size: 21px;
+}
+h5 {
+    font-size: 18px;
+}
+h6 {
+    font-size: 15px;
+}
+
+
+.container {
+    width: 94%;
+    margin: 0 auto;
+}
+
+
+/* header and main nav */
+// NESTING 2
+header {
+    font-family: $font1;
+    ul {
+        display: none;
+    }
+}
+
+
+.top-logo {
+    width: $sizeWidth;
+    margin: 20px auto 40px;
+}
+
+
+
+/* posts */
+article {
+    margin-bottom: 50px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.image-part {
+    margin-bottom: 10px;
+}
+
+// NESTING 3
+.post-title {
+    margin-top: 0;
+    a {
+        @include post-title-style;
+        a {
+            &:hover {
+                color: $colorBlue;
+            }
+        }
+    }
+}
+
+
+
+/* footer */
+// NESTING 4
+footer {
+    padding: 30px 0;
+    text-align: center;
+    background: #eaf2ff;
+    color: $colorGrey;
+    a {
+        color: $colorLightGrey;
+        &:hover {
+            color: $colorBlack;
+        }
+    }
+}
+
+.footer-logo {
+    width: $sizeWidth;
+    margin: 20px auto;
+    text-align: center;
+    vertical-align: middle;
+}
+.footer-social-links {
+    padding: $spacing;
+    line-height: 2em;
+}
+// NESTING 5
+.footer-social-links {
+    a {
+    margin: 0 10px;
+    font-size: 16px;
+    letter-spacing: $spacing2;
+    text-transform: uppercase;
+    span {
+        display: none;
+    }
+ }
+}
+
+#footer-copyright {
+    padding: $spacing;
+    font-size: 12px;
+    color: #989898;
+}
+
+
+@media only screen and (min-width: 650px) {
+    .container {
+        width: 90%;
+    }
+    // NESTING 6
+    header {
+        nav {
+        max-width: 1170px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60px;
+        ul {
+            display: flex;
+            ul {
+                visibility: hidden;
+                opacity: 0;
+                display: block;
+                position: absolute;
+                z-index: 9999;
+                left: 0;
+                background: #f0f0f0;
+                transition: all 0.2s ease-out;
+                li {
+                    border-top: 1px solid #e9e9e9;
+                    margin: 0;
+                }
+                a {
+                    display: block;
+                    color: #111111;
+                    min-width: 175px;
+                    margin: 0;
+                    padding: 20px 10px;
+                    line-height: 1.4em;
+                    letter-spacing: $spacing2;
+                    transition: .35s;
+                    &:hover {
+                        background: #ffffff;
+                        color: #000; 
+                    }
+                }
+            }
+        }
+        li {
+            margin: 0 15px;
+            position: relative;
+            line-height: 24px;
+            &:hover {
+                ul {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+        }
+        a {
+            font-family: $font1;
+            color: #324360;
+            letter-spacing: $spacing2;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 900;
+            &:hover {
+                color: $colorBlue;
+            }
+        }
+        }
+    }
+
+    header nav li.menu-item-has-children > a::after {
+        margin-left: 7px;
+        font-family: 'FontAwesome';
+        font-size: 13px;
+        color: $colorNavyBlue;
+        content: '\f078';
+    }
+    .current-menu-item a {
+        border-bottom: 2px solid $colorNavyBlue;
+    }
+    /* sub nav */
+
+
+
+    /* posts */
+    article {
+        display: flex;
+    }
+    .image-part {
+        flex: 1;
+        overflow: hidden;
+        margin-bottom: 0;
+        img {
+            transition: transform 3.5s ease-in-out;
+            &:hover {
+                transform: scale(1.5,1.5);
+            }
+        }
+    }
+    .content-part {
+        flex: 1;
+        padding-left: 50px;
+    }
+
+
+
+    /* footer */
+    // NESTING 7
+    .footer-social-links {
+        a {
+            margin: 0 28px;
+            span {
+                display: inline;
+                font-size: 11px;
+            }
+        }
+        i {
+            margin-right: 5px;
+        }
+    }
+}
